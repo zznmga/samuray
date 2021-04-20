@@ -15,6 +15,10 @@
 .dialogsItems .dialog {
 }
 
+.dialogsItems a {
+  text-decoration: none;
+}
+
 .dialogsItems .active {
   color: gold;
 }

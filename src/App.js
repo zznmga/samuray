@@ -15,9 +15,8 @@ function App() {
         <div className="app-wrapper-content">
           <Switch>
             {/* <Redirect from="/" to="/profile" /> */}
-            <Route path="/messages" component={Dialogs} />
+            <Route path="/dialogs" component={Dialogs} />
             <Route path="/profile" component={Profile} />
-            <Route component={Profile} />
           </Switch>
         </div>
       </div>
