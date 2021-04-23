@@ -11,5 +11,6 @@
 
 .item a.active {
   font-weight: bold;
-  color: red;
+  color: blue;
+  font-style: italic;
 }
