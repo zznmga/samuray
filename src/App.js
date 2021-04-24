@@ -6,7 +6,8 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 
-function App() {
+function App(props) {
+  // debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -15,8 +16,17 @@ function App() {
         <div className="app-wrapper-content">
           <Switch>
             {/* <Redirect from="/" to="/profile" /> */}
-            <Route path="/dialogs" component={Dialogs} />
-            <Route path="/profile" component={Profile} />
+            {/* <Route path="/dialogs" component={Dialogs} />
+            <Route path="/profile" component={Profile} /> */}
+
+            <Route
+              path="/dialogs"
+              render={() => <Dialogs state={props.state.dialogPage} />}
+            />
+            <Route
+              path="/profile"
+              render={() => <Profile state={props.state.profilePage} />}
+            />
           </Switch>
         </div>
       </div>

@@ -2,12 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = () => {
-  const posts = [
-    { id: 1, message: 'Espana es pais muy bonita', likesCount: 12 },
-    { id: 2, message: 'Barcelona es la capital de Cataluna', likesCount: 13 },
-  ];
-  const postsData = posts.map((p) => (
+const MyPosts = (props) => {
+  const postsData = props.posts.map((p) => (
     <Post message={p.message} likesCount={p.likesCount} />
   ));
 
