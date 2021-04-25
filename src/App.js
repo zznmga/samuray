@@ -7,7 +7,6 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 
 function App(props) {
-  console.log('App', props);
   return (
     <div className="app-wrapper">
       <Header />

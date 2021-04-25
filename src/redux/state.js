@@ -15,13 +15,13 @@ const posts = [
   { id: 2, message: 'Barcelona es la capital de Cataluna', likesCount: 13 },
 ];
 
-let addPost = (message) => {
+let addPost = () => {
   let newObj = {
     id: 5,
-    message,
+    message: state.profilePage.newPostText,
     likesCount: 5,
   };
-
+  state.profilePage.newPostText = '';
   state.profilePage.posts.push(newObj);
   rerenderEntireTree(state);
 };
@@ -43,5 +43,7 @@ const state = {
   addPost,
   changePost,
 };
+
+window.state = state;
 
 export default state;
