@@ -14,17 +14,18 @@ function App(props) {
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>
-          {/* <Redirect from="/" to="/profile" /> */}
-          {/* <Route path="/dialogs" component={Dialogs} />
-            <Route path="/profile" component={Profile} /> */}
-
           <Route
             path="/dialogs"
             render={() => <Dialogs state={props.state.dialogPage} />}
           />
           <Route
             path="/profile"
-            render={() => <Profile state={props.state.profilePage} />}
+            render={() => (
+              <Profile
+                state={props.state.profilePage}
+                addPost={props.addPost}
+              />
+            )}
           />
         </Switch>
       </div>
