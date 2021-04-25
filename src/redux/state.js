@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from '../render';
+let rerenderEntireTree = () => {
+  console.log('rerenderEntireTree was called');
+};
 
 const dialogs = [
   { id: 1, name: 'Nastya' },
@@ -42,6 +44,10 @@ const state = {
   },
   addPost,
   changePost,
+};
+
+export let subscribe = (callback) => {
+  rerenderEntireTree = callback;
 };
 
 window.state = state;
