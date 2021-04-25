@@ -26,6 +26,11 @@ let addPost = (message) => {
   rerenderEntireTree(state);
 };
 
+let changePost = (message) => {
+  state.profilePage.newPostText = message;
+  rerenderEntireTree(state);
+};
+
 const state = {
   dialogPage: {
     dialogs,
@@ -33,8 +38,10 @@ const state = {
   },
   profilePage: {
     posts,
+    newPostText: 'Espana !',
   },
   addPost,
+  changePost,
 };
 
 export default state;

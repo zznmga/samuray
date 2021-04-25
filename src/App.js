@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 
 function App(props) {
-  // debugger;
+  console.log('App', props);
   return (
     <div className="app-wrapper">
       <Header />
@@ -23,7 +23,8 @@ function App(props) {
             render={() => (
               <Profile
                 state={props.state.profilePage}
-                addPost={props.addPost}
+                addPost={props.state.addPost}
+                changePost={props.state.changePost}
               />
             )}
           />
