@@ -22,8 +22,8 @@ function App(props) {
             render={() => (
               <Profile
                 state={props.state.profilePage}
-                addPost={props.state.addPost}
-                changePost={props.state.changePost}
+                addPost={props.addPost}
+                changePost={props.changePost}
               />
             )}
           />

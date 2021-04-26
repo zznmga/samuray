@@ -1,55 +1,53 @@
-let rerenderEntireTree = () => {
-  console.log('rerenderEntireTree was called');
-};
-
-const dialogs = [
-  { id: 1, name: 'Nastya' },
-  { id: 2, name: 'Vasya' },
-  { id: 3, name: 'Sveta' },
-];
-const messages = [
-  { id: 1, message: 'Hello, how are you ?' },
-  { id: 2, message: 'Hasta la vista' },
-];
-
-const posts = [
-  { id: 1, message: 'Espana es pais muy bonita', likesCount: 12 },
-  { id: 2, message: 'Barcelona es la capital de Cataluna', likesCount: 13 },
-];
-
-let addPost = () => {
-  let newObj = {
-    id: 5,
-    message: state.profilePage.newPostText,
-    likesCount: 5,
-  };
-  state.profilePage.newPostText = '';
-  state.profilePage.posts.push(newObj);
-  rerenderEntireTree(state);
-};
-
-let changePost = (message) => {
-  state.profilePage.newPostText = message;
-  rerenderEntireTree(state);
-};
-
-const state = {
-  dialogPage: {
-    dialogs,
-    messages,
+let store = {
+  _state: {
+    dialogPage: {
+      dialogs: [
+        { id: 1, name: 'Nastya' },
+        { id: 2, name: 'Vasya' },
+        { id: 3, name: 'Sveta' },
+      ],
+      messages: [
+        { id: 1, message: 'Hello, how are you ?' },
+        { id: 2, message: 'Hasta la vista' },
+      ],
+    },
+    profilePage: {
+      posts: [
+        { id: 1, message: 'Espana es pais muy bonita', likesCount: 12 },
+        {
+          id: 2,
+          message: 'Barcelona es la capital de Cataluna',
+          likesCount: 13,
+        },
+      ],
+      newPostText: 'Espana !',
+    },
   },
-  profilePage: {
-    posts,
-    newPostText: 'Espana !',
+  getState() {
+    return this._state;
   },
-  addPost,
-  changePost,
+  _callSubscriber() {
+    console.log('rerenderEntireTree was called');
+  },
+  addPost() {
+    let newObj = {
+      id: 5,
+      message: this._state.profilePage.newPostText,
+      likesCount: 5,
+    };
+    this._state.profilePage.newPostText = '';
+    this._state.profilePage.posts.push(newObj);
+    this._callSubscriber(this._state);
+  },
+  changePost(message) {
+    this._state.profilePage.newPostText = message;
+    this._callSubscriber(this._state);
+  },
+  subscribe(callback) {
+    this._callSubscriber = callback;
+  },
 };
 
-export let subscribe = (callback) => {
-  rerenderEntireTree = callback;
-};
+window.store = store;
 
-window.state = state;
-
-export default state;
+export default store;
