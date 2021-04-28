@@ -15,7 +15,7 @@ function App(props) {
         <Switch>
           <Route
             path="/dialogs"
-            render={() => <Dialogs state={props.state.dialogPage} />}
+            render={() => <Dialogs store={props.store} />}
           />
           <Route
             path="/profile"
