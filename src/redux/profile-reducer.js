@@ -7,7 +7,19 @@ export const updateNewPostTextActionCreater = (message) => ({
   message,
 });
 
-const profileReducer = (state, action) => {
+let initialState = {
+  posts: [
+    { id: 1, message: 'Espana es pais muy bonita', likesCount: 12 },
+    {
+      id: 2,
+      message: 'Barcelona es la capital de Cataluna',
+      likesCount: 13,
+    },
+  ],
+  newPostText: 'Espana !',
+};
+
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       let newObj = {
