@@ -19,6 +19,7 @@ const Dialogs = (props) => {
 
   let onChangeMessage = (e) => {
     let message = e.target.value;
+    console.log('onChangeMessage ', message);
     props.changeMessage(message);
   };
 

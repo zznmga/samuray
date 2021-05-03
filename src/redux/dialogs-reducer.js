@@ -27,12 +27,13 @@ const dialogsReducer = (state = initialState, action) => {
         id: 3,
         message: state.newMessageBody,
       };
-      state.messages.push(message);
-      state.newMessageBody = '';
-      return state;
+      return {
+        ...state,
+        messages: [...state.messages, message],
+        newMessageBody: '',
+      };
     case UPDATE_NEW_MESSAGE_BODY:
-      state.newMessageBody = action.message;
-      return state;
+      return { ...state, newMessageBody: action.message };
     default:
       return state;
   }
