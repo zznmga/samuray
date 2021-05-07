@@ -1,11 +1,17 @@
+import axios from 'axios';
 import React from 'react';
 import s from './Users.module.css';
+import userPhoto from '../../assets/images/user-profile.png';
 
 const Users = (props) => {
-  debugger;
   if (props.users.length === 0) {
     console.log('initUsers');
-    props.initUsers([
+
+    axios
+      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .then((data) => props.initUsers(data.data.items));
+
+    /*    props.initUsers([
       {
         id: 1,
         followed: true,
@@ -34,6 +40,7 @@ const Users = (props) => {
           'https://www.wonderwall.com/wp-content/uploads/sites/2/2020/02/1074921-naomi-watts-and-russell-crowe-are-seen-outside-of-aol-bu.jpg',
       },
     ]);
+    */
   }
   return (
     <div>
@@ -41,7 +48,11 @@ const Users = (props) => {
         <div key={u.id}>
           <span>
             <div>
-              <img className={s.photo} src={u.photoUrl} alt="" />
+              <img
+                className={s.photo}
+                src={u.photos.small == null ? userPhoto : u.photos.small}
+                alt=""
+              />
             </div>
             <div>
               {u.followed ? (
@@ -53,12 +64,12 @@ const Users = (props) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
+              <div>{u.name}</div>
               <div>{u.status}</div>
             </span>
             <span>
-              <div>{u.location.country}</div>
-              <div>{u.location.city}</div>
+              <div>{'u.location.country'}</div>
+              <div>{'u.location.city'}</div>
             </span>
           </span>
         </div>
