@@ -4,10 +4,21 @@ import s from './Users.module.css';
 import userPhoto from '../../assets/images/user-profile.png';
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
-    //this.getUsers = this.getUsers.bind(this);
+  componentDidMount() {
+    console.log('componentDidMount was called');
     this.getUsers();
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate was called');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount was called');
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount was called');
   }
 
   getUsers = () => {
@@ -17,6 +28,7 @@ class Users extends React.Component {
   };
 
   render() {
+    console.log('render ws called');
     return (
       <div>
         <span>Users : {this.props.users.length}</span>
