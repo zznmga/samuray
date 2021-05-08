@@ -10,7 +10,7 @@ const initialState = { users: [] };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case INIT_USERS:
-      return { ...state, users: [...action.users] };
+      return { ...state, users: [...state.users, ...action.users] };
     case FOLLOW:
       return {
         ...state,
