@@ -6,7 +6,16 @@ import userPhoto from '../../assets/images/user-profile.png';
 class Users extends React.Component {
   componentDidMount() {
     console.log('componentDidMount was called');
-    this.getUsers();
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+      )
+      .then((data) => {
+        console.log('initUsers dispatch');
+        this.props.initUsers(data.data.items);
+        console.log('initTotalCountUsers dispatch');
+        this.props.initTotalCountUsers(data.data.totalCount);
+      });
   }
 
   componentDidUpdate() {
@@ -21,17 +30,44 @@ class Users extends React.Component {
     console.log('componentWillMount was called');
   }
 
-  getUsers = () => {
+  changePage = (nextPage) => {
+    console.log('setCurrentPage dispatch');
+    this.props.setCurrentPage(nextPage);
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
-      .then((data) => this.props.initUsers(data.data.items));
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${nextPage}`
+      )
+      .then((data) => {
+        console.log('initUsers(changePage) dispatch');
+        this.props.initUsers(data.data.items);
+      });
   };
 
   render() {
     console.log('render ws called');
+    let pagesCount = Math.ceil(
+      this.props.totalCountUsers / this.props.pageSize
+    );
+
+    let pages = new Array(pagesCount).fill(1).map((e, index) => index + 1);
+
     return (
       <div>
-        <span>Users : {this.props.users.length}</span>
+        <div>Users : {this.props.users.length}</div>
+        <div>Total : {this.props.totalCountUsers}</div>
+        <div>Pages : {pagesCount}</div>
+        <div>
+          {pages.map((p) => {
+            return (
+              <span
+                onClick={(e) => this.changePage(p)}
+                className={this.props.currentPage === p && s.selectedPage}
+              >
+                {p},
+              </span>
+            );
+          })}
+        </div>
 
         {/* <button onClick={this.getUsers}>Get Users</button> */}
 
