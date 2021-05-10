@@ -3,6 +3,7 @@ export const UNFOLLOW = 'UNFOLLOW';
 export const INIT_USERS = 'INIT_USERS';
 export const INIT_TOTAL_COUNT_USERS = 'INIT_TOTAL_COUNT_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_IS_FETCHING = 'SET_IS_FETCHING';
 
 export const followAC = (id) => ({ type: FOLLOW, id });
 export const unfollowAC = (id) => ({ type: UNFOLLOW, id });
@@ -15,12 +16,17 @@ export const setCurrentPageAC = (p) => ({
   type: SET_CURRENT_PAGE,
   currentPage: p,
 });
+export const setIsFetchingAC = (isFetching) => ({
+  type: SET_IS_FETCHING,
+  isFetching,
+});
 
 const initialState = {
   users: [],
   currentPage: 1,
   pageSize: 100,
   totalCountUsers: 0,
+  isFetching: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +59,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, totalCountUsers: action.totalCountUsers };
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.currentPage };
+    case SET_IS_FETCHING:
+      return { ...state, isFetching: action.isFetching };
     default:
       return state;
   }
