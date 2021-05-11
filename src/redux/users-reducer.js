@@ -5,18 +5,18 @@ export const INIT_TOTAL_COUNT_USERS = 'INIT_TOTAL_COUNT_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_IS_FETCHING = 'SET_IS_FETCHING';
 
-export const followAC = (id) => ({ type: FOLLOW, id });
-export const unfollowAC = (id) => ({ type: UNFOLLOW, id });
-export const initUsersAC = (users) => ({ type: INIT_USERS, users });
-export const initTotalCountUsersAC = (totalCountUsers) => ({
+export const follow = (id) => ({ type: FOLLOW, id });
+export const unfollow = (id) => ({ type: UNFOLLOW, id });
+export const initUsers = (users) => ({ type: INIT_USERS, users });
+export const initTotalCountUsers = (totalCountUsers) => ({
   type: INIT_TOTAL_COUNT_USERS,
   totalCountUsers,
 });
-export const setCurrentPageAC = (p) => ({
+export const setCurrentPage = (p) => ({
   type: SET_CURRENT_PAGE,
   currentPage: p,
 });
-export const setIsFetchingAC = (isFetching) => ({
+export const setIsFetching = (isFetching) => ({
   type: SET_IS_FETCHING,
   isFetching,
 });
