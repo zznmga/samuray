@@ -13,9 +13,9 @@ import {
 import Preloader from '../common/Preloader/Preloader';
 
 class UsersContainer extends React.Component {
+  debugger;
   componentDidMount() {
-    debugger;
-    this.props.setFetching(true);
+    this.props.setIsFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
@@ -23,20 +23,20 @@ class UsersContainer extends React.Component {
       .then((data) => {
         this.props.initUsers(data.data.items);
         this.props.initTotalCountUsers(data.data.totalCount);
-        this.props.setFetching(false);
+        this.props.setIsFetching(false);
       });
   }
 
   changePage = (nextPage) => {
     this.props.setCurrentPage(nextPage);
-    this.props.setFetching(true);
+    this.props.setIsFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${nextPage}`
       )
       .then((data) => {
         this.props.initUsers(data.data.items);
-        this.props.setFetching(false);
+        this.props.setIsFetching(false);
       });
   };
 
