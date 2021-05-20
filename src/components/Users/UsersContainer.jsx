@@ -18,7 +18,10 @@ class UsersContainer extends React.Component {
     this.props.setIsFetching(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((data) => {
         this.props.initUsers(data.data.items);
@@ -32,7 +35,10 @@ class UsersContainer extends React.Component {
     this.props.setIsFetching(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${nextPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${nextPage}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((data) => {
         this.props.initUsers(data.data.items);
