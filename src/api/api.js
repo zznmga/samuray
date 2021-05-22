@@ -23,15 +23,13 @@ export const usersAPI = {
     return instance.post(`follow/${id}`).then((result) => result.data);
   },
 
-  authMe() {
-    return instance
-      .get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
-      .then((result) => result.data);
-  },
-
   getProfileById(userId) {
-    return instance.get(
-      `https://social-network.samuraijs.com/api/1.0/profile/${userId}`
-    );
+    return instance.get(`profile/${userId}`);
+  },
+};
+
+export const authAPI = {
+  me() {
+    return instance.get(`auth/me`).then((result) => result.data);
   },
 };
