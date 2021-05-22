@@ -2,19 +2,19 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { setProfile } from '../../redux/profile-reducer';
+import { setProfile, getProfileThunk } from '../../redux/profile-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import { withRouter } from 'react-router';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    console.log('componentDidMount PC');
     let userId = this.props.match.params.userId || 2;
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then((result) => {
-        this.props.setProfile(result.data);
-      });
+    this.props.getProfileThunk(userId);
+    // axios
+    //   .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    //   .then((result) => {
+    //     this.props.setProfile(result.data);
+    //   });
   }
 
   render() {
@@ -29,6 +29,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setProfile })(
+export default connect(mapStateToProps, { setProfile, getProfileThunk })(
   withRouter(ProfileContainer)
 );

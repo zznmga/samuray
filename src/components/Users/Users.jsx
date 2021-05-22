@@ -45,30 +45,14 @@ let Users = (props) => {
               {u.followed ? (
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.toggleFollowing(true, u.id);
-                    usersAPI.unfollow(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.unfollow(u.id);
-                        props.toggleFollowing(false, u.id);
-                      }
-                    });
-                  }}
+                  onClick={() => props.unfollowThunk(u.id)}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.toggleFollowing(true, u.id);
-                    usersAPI.follow(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.toggleFollowing(false, u.id);
-                        props.follow(u.id);
-                      }
-                    });
-                  }}
+                  onClick={() => props.followThunk(u.id)}
                 >
                   Follow
                 </button>
@@ -92,34 +76,3 @@ let Users = (props) => {
 };
 
 export default Users;
-
-/*    props.initUsers([
-      {
-        id: 1,
-        followed: true,
-        fullName: 'Robert',
-        status: 'I am root',
-        location: { city: 'Kiev', country: 'Ukraine' },
-        photoUrl:
-          'https://www.wonderwall.com/wp-content/uploads/sites/2/2020/02/1074921-naomi-watts-and-russell-crowe-are-seen-outside-of-aol-bu.jpg',
-      },
-      {
-        id: 2,
-        followed: false,
-        fullName: 'Melisa',
-        status: 'I am developer',
-        location: { city: 'London', country: 'UK' },
-        photoUrl:
-          'https://www.wonderwall.com/wp-content/uploads/sites/2/2020/02/1074921-naomi-watts-and-russell-crowe-are-seen-outside-of-aol-bu.jpg',
-      },
-      {
-        id: 3,
-        followed: true,
-        fullName: 'Karl',
-        status: 'I am designer',
-        location: { city: 'Barcelona', country: 'Espana' },
-        photoUrl:
-          'https://www.wonderwall.com/wp-content/uploads/sites/2/2020/02/1074921-naomi-watts-and-russell-crowe-are-seen-outside-of-aol-bu.jpg',
-      },
-    ]);
-    */

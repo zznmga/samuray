@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/api';
+
 export const FOLLOW = 'FOLLOW';
 export const UNFOLLOW = 'UNFOLLOW';
 export const INIT_USERS = 'INIT_USERS';
@@ -82,3 +84,39 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(setIsFetching(true));
+    dispatch(setCurrentPage(currentPage)); //added
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(initUsers(data.items));
+      dispatch(initTotalCountUsers(data.totalCount));
+      dispatch(setIsFetching(false));
+    });
+  };
+};
+
+export const unfollowThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowing(true, userId));
+    usersAPI.unfollow(userId).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(unfollow(userId));
+      }
+      dispatch(toggleFollowing(false, userId));
+    });
+  };
+};
+
+export const followThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowing(true, userId));
+    usersAPI.follow(userId).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(follow(userId));
+      }
+      dispatch(toggleFollowing(false, userId));
+    });
+  };
+};
