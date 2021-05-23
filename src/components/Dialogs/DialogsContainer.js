@@ -8,6 +8,7 @@ import {
 //import StoreContext from '../../StoreContext';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 // const DialogsContainer = (props) => {
 //   return (
@@ -57,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-//export default DialogsContainer;
-export default withAuthRedirect(
-  connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-);
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Dialogs);
