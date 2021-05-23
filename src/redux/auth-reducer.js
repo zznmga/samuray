@@ -29,6 +29,7 @@ export const setAuthUserData = (userId, email, login) => ({
 
 export const getAuthUserData = () => {
   return (dispatch) => {
+    console.log('authAPI.me was called');
     authAPI.me().then((response) => {
       if (response.resultCode === 0) {
         let { id, email, login } = response.data;
