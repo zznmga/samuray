@@ -2,12 +2,22 @@ import React from 'react';
 
 class ProfileStatus extends React.Component {
   constructor(props) {
-    console.log('Constructor ProfileStatus');
+    console.log('Constructor ProfileStatus', props);
     super(props);
     this.state = {
       editMode: false,
       status: props.status,
     };
+  }
+
+  componentDidMount() {
+    console.log('ComponentDidMount');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({ status: this.props.status });
+    }
   }
 
   activateEditMode = (e) => {
@@ -30,7 +40,7 @@ class ProfileStatus extends React.Component {
   };
 
   render() {
-    console.log('render ProfileStatus', this.state);
+    console.log('render ProfileStatus', this.state, this.props);
     return (
       <div>
         {!this.state.editMode ? (
