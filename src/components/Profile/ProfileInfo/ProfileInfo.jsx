@@ -18,7 +18,10 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.small} alt="" />
       </div>
       <div>
-        <ProfileStatus status={'I am React developer'} />
+        <ProfileStatus
+          status={props.status}
+          updateStatusThunk={props.updateStatusThunk}
+        />
       </div>
     </div>
   );
