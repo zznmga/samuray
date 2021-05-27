@@ -1,21 +1,16 @@
 import { profileAPI, usersAPI } from '../api/api';
 
 export const ADD_POST = 'ADD_POST';
-export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 export const SET_PROFILE = 'SET_PROFILE';
 export const SET_STATUS = 'SET_STATUS';
-
-export const addPostActionCreater = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreater = (message) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  message,
+export const addPostActionCreater = (newPostText) => ({
+  type: ADD_POST,
+  newPostText,
 });
-
 export const setProfile = (profile) => ({
   type: SET_PROFILE,
   profile,
 });
-
 export const setStatus = (status) => ({
   type: SET_STATUS,
   status,
@@ -30,7 +25,6 @@ let initialState = {
       likesCount: 13,
     },
   ],
-  newPostText: 'Espana !',
   profile: null,
   status: '',
 };
@@ -40,12 +34,10 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newObj = {
         id: 5,
-        message: state.newPostText,
+        message: action.newPostText,
         likesCount: 5,
       };
-      return { ...state, posts: [...state.posts, newObj], newPostText: '' };
-    case UPDATE_NEW_POST_TEXT:
-      return { ...state, newPostText: action.message };
+      return { ...state, posts: [...state.posts, newObj] };
     case SET_PROFILE:
       return { ...state, profile: action.profile };
     case SET_STATUS:
