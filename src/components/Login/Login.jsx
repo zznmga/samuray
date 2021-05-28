@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { maxLength10, required } from '../../utils/validators/validators';
+import { Input } from '../FormElements/Textarea';
 
 const Login = (props) => {
   let handler = (values) => {
@@ -23,16 +25,18 @@ const LoginForm = (props) => {
         <div>
           <Field
             placeholder={'Your login'}
-            component={'input'}
+            component={Input}
             name={'login'}
+            validate={[required, maxLength10]}
           />
         </div>
         <div>
           <Field
             placeholder={'Your password'}
-            component={'input'}
+            component={Input}
             type={'password'}
             name={'pass'}
+            validate={[required, maxLength10]}
           />
         </div>
         <div>
