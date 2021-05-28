@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLength10, required } from '../../utils/validators/validators';
-import { Input } from '../FormElements/Textarea';
+import { Input } from '../common/FormControls/FormControls';
 
 const Login = (props) => {
   let handler = (values) => {

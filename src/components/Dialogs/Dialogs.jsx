@@ -4,7 +4,7 @@ import Message from './Message/Message';
 import s from './Dialogs.module.css';
 import { Field, reduxForm } from 'redux-form';
 import { maxLength10, required } from '../../utils/validators/validators';
-import { Textarea } from '../FormElements/Textarea';
+import { Textarea } from '../common/FormControls/FormControls';
 
 const Dialogs = (props) => {
   let state = props.dialogsPage;
