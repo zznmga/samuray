@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './FormControls.module.css';
 
 export const Element = ({ input, children, meta: { touched, error } }) => {
-  console.log('Element render', touched, error);
   const hasError = touched && error;
   return (
     <div>
