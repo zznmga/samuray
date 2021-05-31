@@ -14,7 +14,10 @@ import { profileAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.match.params.userId || 17213;
+    let userId = this.props.match.params.userId;
+    if (!userId) {
+      userId = this.props.authorizedUsedId;
+    }
     this.props.getProfileThunk(userId);
     this.props.getProfileStatusThunk(userId);
   }
@@ -28,6 +31,8 @@ let mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    authorizedUsedId: state.auth.userId,
+    isAuth: state.auth.isAuth,
   };
 };
 

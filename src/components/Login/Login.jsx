@@ -30,7 +30,7 @@ const Login = (props) => {
 
 const LoginForm = (props) => {
   console.log('LoginForm render');
-
+  //debugger;
   return (
     <div>
       <form onSubmit={props.handleSubmit}>
@@ -57,6 +57,7 @@ const LoginForm = (props) => {
         <div>
           <button>Login</button>
         </div>
+        <div>{props.error ? props.error : ' '}</div>
       </form>
     </div>
   );
