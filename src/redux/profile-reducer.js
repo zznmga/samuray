@@ -1,12 +1,20 @@
 import { profileAPI, usersAPI } from '../api/api';
 
 export const ADD_POST = 'ADD_POST';
+export const REMOVE_POST = 'REMOVE_POST';
 export const SET_PROFILE = 'SET_PROFILE';
 export const SET_STATUS = 'SET_STATUS';
+
 export const addPostActionCreater = (newPostText) => ({
   type: ADD_POST,
   newPostText,
 });
+
+export const removePostActionCreater = (id) => ({
+  type: REMOVE_POST,
+  id,
+});
+
 export const setProfile = (profile) => ({
   type: SET_PROFILE,
   profile,
@@ -38,6 +46,11 @@ const profileReducer = (state = initialState, action) => {
         likesCount: 5,
       };
       return { ...state, posts: [...state.posts, newObj] };
+    case REMOVE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id !== action.id),
+      };
     case SET_PROFILE:
       return { ...state, profile: action.profile };
     case SET_STATUS:

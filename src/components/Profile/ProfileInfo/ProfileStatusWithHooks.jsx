@@ -27,6 +27,7 @@ export const ProfileStatusWithHooks = (props) => {
     setStatus(props.status);
   }, [props.status]);
 
+  console.log('Before return');
   return (
     <div>
       {!editMode && (
