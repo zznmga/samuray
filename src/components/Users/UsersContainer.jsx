@@ -23,24 +23,10 @@ import { getUsersSelector } from '../../redux/users-selectors';
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
-    // this.props.setIsFetching(true);
-    // usersAPI
-    //   .getUsers(this.props.currentPage, this.props.pageSize)
-    //   .then((data) => {
-    //     this.props.initUsers(data.items);
-    //     this.props.initTotalCountUsers(data.totalCount);
-    //     this.props.setIsFetching(false);
-    //   });
   }
 
   changePage = (nextPage) => {
     this.props.getUsers(nextPage, this.props.pageSize);
-    //this.props.setCurrentPage(nextPage);
-    // this.props.setIsFetching(true);
-    // usersAPI.getUsers(nextPage, this.props.pageSize).then((data) => {
-    //   this.props.initUsers(data.items);
-    //   this.props.setIsFetching(false);
-    // });
   };
 
   render() {
@@ -67,7 +53,6 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    //users: state.usersPage.users,
     users: getUsersSelector(state),
     currentPage: state.usersPage.currentPage,
     pageSize: state.usersPage.pageSize,
@@ -76,30 +61,6 @@ const mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
-/*
-const mapDispatchToProps = (dispatch) => {
-  return {
-    follow(id) {
-      dispatch(followAC(id));
-    },
-    unfollow(id) {
-      dispatch(unfollowAC(id));
-    },
-    initUsers(users) {
-      dispatch(initUsersAC(users));
-    },
-    initTotalCountUsers(totalCountUsers) {
-      dispatch(initTotalCountUsersAC(totalCountUsers));
-    },
-    setCurrentPage(p) {
-      dispatch(setCurrentPageAC(p));
-    },
-    setFetching(isFetching) {
-      dispatch(setIsFetchingAC(isFetching));
-    },
-  };
-};
-*/
 
 export default compose(
   // withAuthRedirect,

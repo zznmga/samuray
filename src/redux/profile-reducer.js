@@ -1,9 +1,9 @@
 import { profileAPI, usersAPI } from '../api/api';
 
-export const ADD_POST = 'ADD_POST';
-export const REMOVE_POST = 'REMOVE_POST';
-export const SET_PROFILE = 'SET_PROFILE';
-export const SET_STATUS = 'SET_STATUS';
+const ADD_POST = 'samuray/profile/ADD_POST';
+const REMOVE_POST = 'samuray/profile/REMOVE_POST';
+const SET_PROFILE = 'samuray/profile/SET_PROFILE';
+const SET_STATUS = 'samuray/profile/SET_STATUS';
 
 export const addPostActionCreater = (newPostText) => ({
   type: ADD_POST,
@@ -63,27 +63,24 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 export const getProfileThunk = (userId) => {
-  return (dispatch) => {
-    usersAPI.getProfileById(userId).then((result) => {
-      dispatch(setProfile(result.data));
-    });
+  return async (dispatch) => {
+    let result = await usersAPI.getProfileById(userId);
+    dispatch(setProfile(result.data));
   };
 };
 
 export const getProfileStatusThunk = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId).then((result) => {
-      dispatch(setStatus(result.data));
-    });
+  return async (dispatch) => {
+    let result = await profileAPI.getStatus(userId);
+    dispatch(setStatus(result.data));
   };
 };
 
 export const updateStatusThunk = (status) => {
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then((result) => {
-      if (result.resultCode === 0) {
-        dispatch(setStatus(status));
-      }
-    });
+  return async (dispatch) => {
+    let result = await profileAPI.updateStatus(status);
+    if (result.resultCode === 0) {
+      dispatch(setStatus(status));
+    }
   };
 };

@@ -1,7 +1,7 @@
 import { authAPI } from '../api/api';
 import { getAuthUserData } from './auth-reducer';
 
-export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+export const INITIALIZED_SUCCESS = 'samuray/app/INITIALIZED_SUCCESS';
 
 let initialState = {
   initialized: false,
@@ -22,9 +22,8 @@ let appReducer = (state = initialState, action) => {
 export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
 
 export const initialize = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     console.log('App reducer initialize was called');
-
     let promiseResult = dispatch(getAuthUserData());
     promiseResult.then(() => {
       dispatch(initializedSuccess());

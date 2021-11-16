@@ -8,7 +8,8 @@ import {
   maxLength30,
   required,
 } from '../../utils/validators/validators';
-import { Input } from '../common/FormControls/FormControls';
+import { createField, Input } from '../common/FormControls/FormControls';
+import styles from '../../components/common/FormControls/FormControls.module.css';
 
 const Login = (props) => {
   let handler = (values) => {
@@ -28,36 +29,31 @@ const Login = (props) => {
   );
 };
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
   console.log('LoginForm render');
-  //debugger;
+
   return (
     <div>
-      <form onSubmit={props.handleSubmit}>
-        <div>
-          <Field
-            placeholder={'Your login'}
-            component={Input}
-            name={'login'}
-            validate={[required, maxLength30]}
-          />
-        </div>
-        <div>
-          <Field
-            placeholder={'Your password'}
-            component={Input}
-            type={'password'}
-            name={'pass'}
-            validate={[required, maxLength30]}
-          />
-        </div>
-        <div>
-          <Field component={'input'} type={'checkbox'} name={'rememberMe'} />
-        </div>
+      <form onSubmit={handleSubmit}>
+        {createField('Your login', 'login', [required, maxLength30], Input)}
+
+        {createField('Your password', 'pass', [required, maxLength30], Input, {
+          type: 'password',
+        })}
+
+        {createField(
+          null,
+          'rememberMe',
+          null,
+          Input,
+          { type: 'checkbox' },
+          'remember me'
+        )}
+
         <div>
           <button>Login</button>
         </div>
-        <div>{props.error ? props.error : ' '}</div>
+        {error && <div className={styles.formSummaryError}>{error}</div>}
       </form>
     </div>
   );
