@@ -14,6 +14,10 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initialize } from './redux/app-reducer';
 
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 class App extends React.Component {
   componentDidMount() {
     this.props.initialize();
@@ -51,7 +55,19 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(
+let AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { initialize })
 )(App);
+
+const SamurajJSApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  );
+};
+
+export default SamurajJSApp;

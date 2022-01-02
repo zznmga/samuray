@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.small} alt="" />
       </div>
       <div>
-        <ProfileStatusWithHooks
+        <ProfileStatus
           status={props.status}
           updateStatusThunk={props.updateStatusThunk}
         />
