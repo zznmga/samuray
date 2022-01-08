@@ -5,18 +5,28 @@ import { compose } from 'redux';
 
 import './App.css';
 import Preloader from './components/common/Preloader/Preloader';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+//import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
+//import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initialize } from './redux/app-reducer';
 
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+
+import { withSuspense } from './hoc/withSuspense';
+
+const DialogsContainer = React.lazy(() =>
+  import('./components/Dialogs/DialogsContainer')
+);
+
+const ProfileContainer = React.lazy(() =>
+  import('./components/Profile/ProfileContainer')
+);
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,15 +44,17 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Switch>
-            <Route path="/dialogs" render={() => <DialogsContainer />} />
-            <Route
-              path="/profile/:userId?"
-              render={() => <ProfileContainer />}
-            />
-            <Route path="/users" render={() => <UsersContainer />} />
-            <Route path="/login" render={() => <Login />} />
-          </Switch>
+          <React.Suspense fallback={<div>Loading... </div>}>
+            <Switch>
+              <Route path="/dialogs" render={() => <DialogsContainer />} />
+              <Route
+                path="/profile/:userId?"
+                render={() => <ProfileContainer />}
+              />
+              <Route path="/users" render={() => <UsersContainer />} />
+              <Route path="/login" render={() => <Login />} />
+            </Switch>
+          </React.Suspense>
         </div>
       </div>
     );
