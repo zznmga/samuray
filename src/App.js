@@ -16,7 +16,7 @@ import { initialize } from './redux/app-reducer';
 
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 import { withSuspense } from './hoc/withSuspense';
 
@@ -74,11 +74,11 @@ let AppContainer = compose(
 
 const SamurajJSApp = (props) => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
