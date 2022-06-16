@@ -3,8 +3,15 @@ import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import ProfileStatus from './ProfileStatus';
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
+import userPhoto from '../../../assets/images/user-profile.png';
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({ uploadAvatarThunk, isOwner, ...props }) => {
+  const onAvatarChange = (e) => {
+    if (e.target.files.length > 0) {
+      uploadAvatarThunk(e.target.files[0]);
+    }
+  };
+
   if (!props.profile) {
     return <Preloader />;
   }
@@ -16,7 +23,12 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.descriptionInfo}>ava + description</div>
       <div>
-        <img src={props.profile.photos.small} alt="" />
+        <img
+          src={props.profile.photos.small || userPhoto}
+          alt=""
+          className={s.imageProfile}
+        />
+        {isOwner && <input type="file" onChange={onAvatarChange} />}
       </div>
       <div>
         <ProfileStatus

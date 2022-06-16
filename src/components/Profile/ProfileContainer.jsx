@@ -6,6 +6,7 @@ import {
   getProfileThunk,
   getProfileStatusThunk,
   updateStatusThunk,
+  uploadAvatarThunk,
 } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
@@ -23,9 +24,8 @@ class ProfileContainer extends React.Component {
     }
     this.props.getProfileThunk(userId);
     this.props.getProfileStatusThunk(userId);
-
   }
-  
+
   componentDidMount() {
     this.updateProfileInfo();
   }
@@ -37,7 +37,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    return <Profile {...this.props} />;
+    return (
+      <Profile {...this.props} isOwner={!this.props.match.params.userId} />
+    );
   }
 }
 
@@ -58,5 +60,6 @@ export default compose(
     getProfileThunk,
     getProfileStatusThunk,
     updateStatusThunk,
+    uploadAvatarThunk,
   })
 )(ProfileContainer);

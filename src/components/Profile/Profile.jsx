@@ -10,6 +10,8 @@ const Profile = (props) => {
         profile={props.profile}
         status={props.status}
         updateStatusThunk={props.updateStatusThunk}
+        isOwner={props.isOwner}
+        uploadAvatarThunk={props.uploadAvatarThunk}
       />
       <MyPostsContainer />
     </div>

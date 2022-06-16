@@ -1,3 +1,7 @@
 .descriptionInfo {
   padding: 10px;
 }
+
+.imageProfile {
+  max-width: 200px;
+}

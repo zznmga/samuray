@@ -4,6 +4,7 @@ const ADD_POST = 'samuray/profile/ADD_POST';
 const REMOVE_POST = 'samuray/profile/REMOVE_POST';
 const SET_PROFILE = 'samuray/profile/SET_PROFILE';
 const SET_STATUS = 'samuray/profile/SET_STATUS';
+const UPLOAD_AVATAR_SUCCESS = 'samuray/profile/UPLOAD_AVATAR_SUCCESS';
 
 export const addPostActionCreater = (newPostText) => ({
   type: ADD_POST,
@@ -22,6 +23,11 @@ export const setProfile = (profile) => ({
 export const setStatus = (status) => ({
   type: SET_STATUS,
   status,
+});
+
+export const uploadAvatarSuccess = (photos) => ({
+  type: UPLOAD_AVATAR_SUCCESS,
+  photos,
 });
 
 let initialState = {
@@ -55,6 +61,8 @@ const profileReducer = (state = initialState, action) => {
       return { ...state, profile: action.profile };
     case SET_STATUS:
       return { ...state, status: action.status };
+    case UPLOAD_AVATAR_SUCCESS:
+      return { ...state, profile: { ...state.profile, photos: action.photos } };
     default:
       return state;
   }
@@ -81,6 +89,15 @@ export const updateStatusThunk = (status) => {
     let result = await profileAPI.updateStatus(status);
     if (result.resultCode === 0) {
       dispatch(setStatus(status));
+    }
+  };
+};
+
+export const uploadAvatarThunk = (avatar) => {
+  return async (dispatch) => {
+    let result = await profileAPI.updateAvatar(avatar);
+    if (result.data.resultCode === 0) {
+      dispatch(uploadAvatarSuccess(result.data.data.photos));
     }
   };
 };
