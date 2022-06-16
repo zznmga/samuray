@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { profileAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  updateProfileInfo() {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUsedId;
@@ -23,6 +23,17 @@ class ProfileContainer extends React.Component {
     }
     this.props.getProfileThunk(userId);
     this.props.getProfileStatusThunk(userId);
+
+  }
+  
+  componentDidMount() {
+    this.updateProfileInfo();
+  }
+
+  componentDidUpdate(prevProps, prevState, xz) {
+    if (this.props.match.params.userId != prevProps.match.params.userId) {
+      this.updateProfileInfo();
+    }
   }
 
   render() {
